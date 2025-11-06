@@ -6,67 +6,147 @@
     <title>Time Table - Raghav Panthi</title>
     <link rel="icon" href="logo.jpg" type="image/icon type">
     <style>
+        /* ===== GENERAL STYLING ===== */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #eee4dc;
-            color: #171f2b;
+            background: linear-gradient(135deg, #fff8e7, #fdf2cb);
+            color: #3a3a2e;
         }
-        h4 {
-            text-align: center;
-            margin: 20px 0;
-            color: #090808;
-            font-size: 24px;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid #444;
-            width: 1;
-            animation: typing 4s steps(30, end), blink 0.5s step-end infinite alternate;
-            background: linear-gradient(90deg, #4aa7e1, #ff0202);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        @keyframes typing { from { width: 0; } to { width: 100%; } }
-        @keyframes blink { from { border-color: transparent; } to { border-color: #444; } }
 
+        /* ===== HEADINGS ===== */
         h3 {
             text-align: center;
-            margin: 20px 0;
-            color: #141336;
-            font-size: 24px;
+            margin: 25px 0 15px 0;
+            font-size: 28px;
             text-transform: uppercase;
-            background: linear-gradient(90deg, hsl(0, 60%, 60%), #164acb);
+            background: linear-gradient(90deg, #e7b100, #d86b00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1.5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+        }
+
+        h4 {
+            text-align: center;
+            margin: 25px 0;
+            font-size: 22px;
+            font-weight: 600;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #a17c00;
+            width: 1;
+            animation: typing 4s steps(40, end), blink 0.5s step-end infinite alternate;
+            background: linear-gradient(90deg, #e0b300, #f78c00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            from { border-color: transparent; }
+            to { border-color: #a17c00; }
+        }
+
+        /* ===== TABLE ===== */
         table {
-            margin: 20px auto;
+            margin: 30px auto;
             border-collapse: collapse;
             width: 90%;
-            background-color: #fff;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fffef6;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(190, 150, 60, 0.25);
+            transition: transform 0.2s ease-in-out;
         }
+
+        table:hover {
+            transform: scale(1.01);
+        }
+
         th, td {
-            border: 1px solid #a07e7e;
+            border: 1px solid #e0c87a;
             text-align: center;
-            padding: 10px;
-            font-size: 16px;
+            padding: 12px;
+            font-size: 15px;
         }
+
         th {
-            background-color: #395a82;
-            color: #fff;
+            background: linear-gradient(135deg, #f2c94c, #f2994a);
+            color: #4b3d00;
             text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
         }
-        tr:nth-child(odd) { background-color: #fbe9e9; }
-        tr:hover { background-color: #ffd4d4; cursor: pointer; }
-        td { font-size: 14px; }
-        .highlight { color: #c38f8f; font-weight: bold; }
+
+        tr:nth-child(odd) {
+            background-color: #fff9e6;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fffdf3;
+        }
+
+        tr:hover {
+            background-color: #fff2b8;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        td {
+            line-height: 1.5;
+        }
+
+        .highlight {
+            color: #e48a00;
+            font-weight: bold;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            background: linear-gradient(90deg, #f7e8a2, #f2c94c);
+            color: #5a4a00;
+            padding: 15px 10px;
+            margin-top: 40px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        footer a {
+            color: #a87100;
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 6px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #e67800;
+        }
+
+        /* ===== RESPONSIVENESS ===== */
+        @media (max-width: 768px) {
+            table, th, td {
+                font-size: 13px;
+                padding: 8px;
+            }
+            h3 {
+                font-size: 22px;
+            }
+            h4 {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 <body>
     <h3>Time Table for Raghav Panthi (BCA 5th Semester)</h3>
+
     <table>
         <tr>
             <th>Time</th>
@@ -77,14 +157,14 @@
         <tr>
             <td>4:30–5:00 AM</td>
             <td>Wake up, freshen up, light exercise</td>
-            <td>Wake up, stretch & plan the day</td>
-            <td>Wake up & relax a bit</td>
+            <td>Wake up & plan the day</td>
+            <td>Wake up & relax</td>
         </tr>
         <tr>
             <td>5:00–6:00 AM</td>
             <td>Study: <b>Numerical Methods</b></td>
-            <td>AI/ML Deep Learning Session</td>
-            <td>AI/ML Practice or coding mini-project</td>
+            <td>AI/ML Deep Learning Practice</td>
+            <td>Mini project / explore AI tools</td>
         </tr>
         <tr>
             <td>6:00–6:30 AM</td>
@@ -96,31 +176,31 @@
             <td>6:30–7:00 AM</td>
             <td>Walk to College</td>
             <td>Walk to College</td>
-            <td>Free / Walk</td>
+            <td>Outdoor walk</td>
         </tr>
         <tr>
             <td>7:00–11:00 AM</td>
-            <td>College (Lectures & Labs)</td>
+            <td>College Classes</td>
             <td>College / Revision</td>
-            <td>Free</td>
+            <td>Free time</td>
         </tr>
         <tr>
             <td>11:00–12:30 PM</td>
             <td>Walk home + Lunch + Rest</td>
             <td>Lunch + Rest</td>
-            <td>Lunch + Family time</td>
+            <td>Family time</td>
         </tr>
         <tr>
             <td>12:30–2:00 PM</td>
-            <td><b>DotNet Application</b> (coding practice)</td>
+            <td><b>DotNet Application</b> (Coding Practice)</td>
             <td>Revise DotNet or Numerical</td>
-            <td>Work on project / new topic</td>
+            <td>Work on project</td>
         </tr>
         <tr>
             <td>2:00–3:00 PM</td>
             <td>Research Methodology / Assignments</td>
             <td>Weekly Revision</td>
-            <td>Explore new AI/ML tools</td>
+            <td>Explore ML frameworks</td>
         </tr>
         <tr>
             <td>3:00–4:00 PM</td>
@@ -149,7 +229,7 @@
         <tr>
             <td>8:00–9:00 PM</td>
             <td><b>Omdena Project Work</b></td>
-            <td>Omdena Work / Coding Practice</td>
+            <td>Omdena / Coding Practice</td>
             <td>Omdena Review or Free</td>
         </tr>
         <tr>
@@ -175,10 +255,11 @@
     <h4>A moment of breakdown is an opportunity for a breakthrough.</h4>
 
     <footer>
-        <div class="container" style="text-align:center; padding:10px;">
+        <div class="container">
             <p>&copy; 2025 Raghav Vian Panthi. All Rights Reserved.</p>
-            <a href="https://raghavpanthi.com.np" target="_blank" class="project-link">Personal Website</a>
+            <a href="https://raghavpanthi.com.np" target="_blank">Personal Website</a>
         </div>
     </footer>
 </body>
 </html>
+
