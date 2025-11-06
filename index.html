@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Table - Raghav Panthi</title>
+    <link rel="icon" href="logo.jpg" type="image/icon type">
     <style>
-        
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -10,39 +13,22 @@
             background-color: #eee4dc;
             color: #171f2b;
         }
-        h4{
+        h4 {
             text-align: center;
             margin: 20px 0;
             color: #090808;
             font-size: 24px;
             overflow: hidden;
             white-space: nowrap;
-            border-right: 3px solid #444; /* Cursor effect */
-            width: 1; /* Start with no width */
+            border-right: 3px solid #444;
+            width: 1;
             animation: typing 4s steps(30, end), blink 0.5s step-end infinite alternate;
             background: linear-gradient(90deg, #4aa7e1, #ff0202);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-          /* Typewriter effect */
-          @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-
-        /* Blinking cursor effect */
-        @keyframes blink {
-            from {
-                border-color: transparent;
-            }
-            to {
-                border-color: #444;
-            }
-        }
+        @keyframes typing { from { width: 0; } to { width: 100%; } }
+        @keyframes blink { from { border-color: transparent; } to { border-color: #444; } }
 
         h3 {
             text-align: center;
@@ -51,9 +37,10 @@
             font-size: 24px;
             text-transform: uppercase;
             background: linear-gradient(90deg, hsl(0, 60%, 60%), #164acb);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         table {
             margin: 20px auto;
             border-collapse: collapse;
@@ -72,108 +59,126 @@
             color: #fff;
             text-transform: uppercase;
         }
-        tr:nth-child(odd) {
-            background-color: #fbe9e9;
-        }
-        tr:hover {
-            background-color: #ffd4d4;
-            cursor: pointer;
-        }
-        td {
-            font-size: 14px;
-        }
-        .highlight {
-            color: #c38f8f;
-            font-weight: bold;
-        }
+        tr:nth-child(odd) { background-color: #fbe9e9; }
+        tr:hover { background-color: #ffd4d4; cursor: pointer; }
+        td { font-size: 14px; }
+        .highlight { color: #c38f8f; font-weight: bold; }
     </style>
-    <meta charset="UTF-8">   <link rel="icon" href="logo.jpg" type="image/icon type">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Table</title>
 </head>
 <body>
-    <h3>Time Table for Raghav Panthi</h3>
+    <h3>Time Table for Raghav Panthi (BCA 5th Semester)</h3>
     <table>
         <tr>
             <th>Time</th>
-            <th>Sunday to Tuesday</th>
-            <th>Wednesday to Friday</th>
+            <th>Monday to Friday</th>
             <th>Saturday</th>
+            <th>Sunday</th>
         </tr>
         <tr>
-            <td>4-5 AM</td>
-            <td>Uuth aani nuha aani exercise</td>
-            <td>Same as Sunday</td>
-            <td>Same as Sunday</td>
+            <td>4:30–5:00 AM</td>
+            <td>Wake up, freshen up, light exercise</td>
+            <td>Wake up, stretch & plan the day</td>
+            <td>Wake up & relax a bit</td>
         </tr>
         <tr>
-            <td>5-6:00 AM</td>
-            <td>Web padh</td>
-            <td>dbms padh</td>
-            <td>Kai padh</td>
+            <td>5:00–6:00 AM</td>
+            <td>Study: <b>Numerical Methods</b></td>
+            <td>AI/ML Deep Learning Session</td>
+            <td>AI/ML Practice or coding mini-project</td>
         </tr>
         <tr>
-            <td>6:30-11 AM</td>
-            <td>College</td>
-            <td>College</td>
-            <td>Revision gar</td>
+            <td>6:00–6:30 AM</td>
+            <td>Breakfast & get ready</td>
+            <td>Breakfast</td>
+            <td>Breakfast</td>
         </tr>
         <tr>
-            <td>10:30-12 PM</td>
-            <td>Time chaina</td>
-            <td>cg_padh</td>
-            <td><span class="highlight">⚡</span></td>
+            <td>6:30–7:00 AM</td>
+            <td>Walk to College</td>
+            <td>Walk to College</td>
+            <td>Free / Walk</td>
         </tr>
         <tr>
-            <td>12-1:30 PM</td>
-            <td>Sowtware Eng</td>
-            <td>Math</td>
-            <td><span class="highlight">⚡</span></td>
+            <td>7:00–11:00 AM</td>
+            <td>College (Lectures & Labs)</td>
+            <td>College / Revision</td>
+            <td>Free</td>
         </tr>
         <tr>
-            <td>1:40-3:00 PM</td>
-            <td>Math</td>
-            <td>Project</td>
-            <td><span class="highlight">⚡</span></td>
+            <td>11:00–12:30 PM</td>
+            <td>Walk home + Lunch + Rest</td>
+            <td>Lunch + Rest</td>
+            <td>Lunch + Family time</td>
         </tr>
         <tr>
-            <td>3-3:30 PM</td>
-            <td>Kati padhchas</td>
-            <td>Kati padhchas aaram gar</td>
-            <td>J garni ho gar</td>
+            <td>12:30–2:00 PM</td>
+            <td><b>DotNet Application</b> (coding practice)</td>
+            <td>Revise DotNet or Numerical</td>
+            <td>Work on project / new topic</td>
         </tr>
         <tr>
-            <td>3-5 PM</td>
-            <td>kai kam gar
-        </td>
-            <td>Aaru kam gar</td>
-            <td><span class="highlight">⚡</span></td>
+            <td>2:00–3:00 PM</td>
+            <td>Research Methodology / Assignments</td>
+            <td>Weekly Revision</td>
+            <td>Explore new AI/ML tools</td>
         </tr>
         <tr>
-            <td>5-8 PM</td>
-            <td>YouTube, khanpin, yeta uuti</td>
-            <td>YouTube, khanpin, yeta uuti</td>
-            <td><span class="highlight">⚡</span></td>
+            <td>3:00–4:00 PM</td>
+            <td>AI/ML Learning or Omdena prep</td>
+            <td>Break / Free time</td>
+            <td>Outdoor / Rest</td>
         </tr>
         <tr>
-            <td>8-9:30 PM</td>
-            <td>Cg padh</td>
-            <td>CG padh</td>
-            
-            <td><span class="highlight">⚡</span></td>
+            <td>4:00–5:00 PM</td>
+            <td>Relax / Snack / Walk</td>
+            <td>Hobby / Chill</td>
+            <td>Same</td>
         </tr>
         <tr>
-            <td>9:30 PM onwards</td>
-            <td>Sut babu kati padhchas</td>
-            <td>Sut babu kati padhchas</td>
-            <td>Sut babu kati padhchas</td>
+            <td>5:00–6:30 PM</td>
+            <td>Study rotation: Networks / Math Foundation</td>
+            <td>Math Foundation Revision</td>
+            <td>Plan next week</td>
         </tr>
-        <h4>A moment of breakdown is an Opportunity for a breakthrough</h3>
-    </table>  <footer>
-            <div class="container" style="position: unset;">
-                <p>&copy; 2024 Raghav Vian Panthi. All Rights Reserved.</p>
-                <a href="https://raghavpanthi.com.np" target="_blank" class="project-link">personal website</a>
-            </div>
-        </footer>
+        <tr>
+            <td>6:30–7:30 PM</td>
+            <td>Dinner + Relax</td>
+            <td>Dinner + Relax</td>
+            <td>Dinner + Family Time</td>
+        </tr>
+        <tr>
+            <td>8:00–9:00 PM</td>
+            <td><b>Omdena Project Work</b></td>
+            <td>Omdena Work / Coding Practice</td>
+            <td>Omdena Review or Free</td>
+        </tr>
+        <tr>
+            <td>9:00–9:30 PM</td>
+            <td>Journal Learning / Plan Next Day</td>
+            <td>Plan Week</td>
+            <td>Reflect & Gratitude</td>
+        </tr>
+        <tr>
+            <td>9:30–10:00 PM</td>
+            <td>Wind Down / Meditation</td>
+            <td>Light Reading / Sleep Prep</td>
+            <td>Rest Early</td>
+        </tr>
+        <tr>
+            <td>10:00 PM</td>
+            <td>Sleep 😴</td>
+            <td>Sleep 😴</td>
+            <td>Sleep 😴</td>
+        </tr>
+    </table>
+
+    <h4>A moment of breakdown is an opportunity for a breakthrough.</h4>
+
+    <footer>
+        <div class="container" style="text-align:center; padding:10px;">
+            <p>&copy; 2025 Raghav Vian Panthi. All Rights Reserved.</p>
+            <a href="https://raghavpanthi.com.np" target="_blank" class="project-link">Personal Website</a>
+        </div>
+    </footer>
 </body>
 </html>
