@@ -1,263 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Table - Raghav Panthi</title>
-    <link rel="icon" href="logo.jpg" type="image/icon type">
-    <style>
-        /* ===== GENERAL STYLING ===== */
-        body {
-            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #fff8e7, #fdf2cb);
-            color: #3a3a2e;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Table - Raghav Panthi</title>
 
-        /* ===== HEADINGS ===== */
-        h3 {
-            text-align: center;
-            margin: 25px 0 15px 0;
-            font-size: 28px;
-            text-transform: uppercase;
-            background: linear-gradient(90deg, #e7b100, #d86b00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1.5px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
-        }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-        h4 {
-            text-align: center;
-            margin: 25px 0;
-            font-size: 22px;
-            font-weight: 600;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid #a17c00;
-            width: 1;
-            animation: typing 4s steps(40, end), blink 0.5s step-end infinite alternate;
-            background: linear-gradient(90deg, #e0b300, #f78c00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+<style>
 
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-        @keyframes blink {
-            from { border-color: transparent; }
-            to { border-color: #a17c00; }
-        }
+/* ===== BODY ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(-45deg, #f7e8a2, #f2c94c, #f2994a, #f7d774);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    color: #333;
+}
 
-        /* ===== TABLE ===== */
-        table {
-            margin: 30px auto;
-            border-collapse: collapse;
-            width: 90%;
-            background-color: #fffef6;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 15px rgba(190, 150, 60, 0.25);
-            transition: transform 0.2s ease-in-out;
-        }
+/* Animated background */
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
 
-        table:hover {
-            transform: scale(1.01);
-        }
+/* ===== CONTAINER ===== */
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: auto;
+}
 
-        th, td {
-            border: 1px solid #e0c87a;
-            text-align: center;
-            padding: 12px;
-            font-size: 15px;
-        }
+/* ===== TITLE ===== */
+h3 {
+    text-align: center;
+    font-size: 32px;
+    margin: 30px 0 10px;
+    font-weight: 600;
+    color: #3a2e00;
+}
 
-        th {
-            background: linear-gradient(135deg, #f2c94c, #f2994a);
-            color: #4b3d00;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            font-weight: 600;
-        }
+/* ===== TABLE ===== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fadeIn 1s ease;
+}
 
-        tr:nth-child(odd) {
-            background-color: #fff9e6;
-        }
+/* Fade animation */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
 
-        tr:nth-child(even) {
-            background-color: #fffdf3;
-        }
+th, td {
+    padding: 14px;
+    text-align: center;
+}
 
-        tr:hover {
-            background-color: #fff2b8;
-            transition: background-color 0.2s ease;
-            cursor: pointer;
-        }
+/* Header */
+th {
+    background: linear-gradient(135deg, #f2994a, #f2c94c);
+    color: #3d2f00;
+    font-weight: 600;
+}
 
-        td {
-            line-height: 1.5;
-        }
+/* Rows */
+tr:nth-child(even) {
+    background: rgba(255,255,255,0.6);
+}
 
-        .highlight {
-            color: #e48a00;
-            font-weight: bold;
-        }
+/* Hover effect */
+tr:hover {
+    transform: scale(1.01);
+    background: #fff2b8;
+    transition: 0.2s;
+}
 
-        /* ===== FOOTER ===== */
-        footer {
-            text-align: center;
-            background: linear-gradient(90deg, #f7e8a2, #f2c94c);
-            color: #5a4a00;
-            padding: 15px 10px;
-            margin-top: 40px;
-            font-size: 14px;
-            font-weight: 500;
-        }
+/* Time column */
+td:first-child {
+    font-weight: bold;
+    color: #7a5200;
+}
 
-        footer a {
-            color: #a87100;
-            text-decoration: none;
-            font-weight: bold;
-            margin-left: 6px;
-            transition: color 0.3s;
-        }
+/* Highlight subjects */
+.subject {
+    font-weight: 600;
+    color: #d35400;
+}
 
-        footer a:hover {
-            color: #e67800;
-        }
+/* ===== QUOTE ===== */
+.quote {
+    text-align: center;
+    margin: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    animation: typing 4s steps(40), blink 0.7s infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #333;
+}
 
-        /* ===== RESPONSIVENESS ===== */
-        @media (max-width: 768px) {
-            table, th, td {
-                font-size: 13px;
-                padding: 8px;
-            }
-            h3 {
-                font-size: 22px;
-            }
-            h4 {
-                font-size: 18px;
-            }
-        }
-    </style>
+/* typing animation */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    from {border-color: transparent;}
+    to {border-color: black;}
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    th, td {
+        font-size: 12px;
+        padding: 8px;
+    }
+}
+
+</style>
 </head>
+
 <body>
-    <h3>Time Table for Raghav Panthi (BCA 5th Semester)</h3>
 
-    <table>
-        <tr>
-            <th>Time</th>
-            <th>Sunday Mondey Wednesday</th>
-            <th>Tuesday Thursday Friday </th>
-            <th>Saturday</th>
-           
-        </tr>
-        <tr>
-            <td>4:30–5:00 AM</td>
-            <td>Wake up,freshen up light exercise</td>
-            <td>Wake up & plan the day</td>
-            <td>Wake up & freshen up</td>
-        </tr>
-        <tr>
-            <td>5:00–6:00 AM</td>
-            <td>Math Foundation Revision</td>
-            <td>Study: <b>Numerical Methods</b></td>
-            <td>Mini project / explore AI tools</td>
-        </tr>
-        <tr>
-            <td>6:00–6:30 AM</td>
-            <td>Breakfast & get ready go </td>
-            <td>Breakfast & get ready go </td>
-            <td>Breakfast</td>
-        </tr>
-        <tr>
-            <td>6:30–7:00 AM</td>
-            <td>Walk to College</td>
-            <td>Walk to College</td>
-            <td>Outdoor walk</td>
-        </tr>
-        <tr>
-            <td>7:00–11:00 AM</td>
-            <td>College Classes</td>
-            <td>College / Revision</td>
-            <td>Free time / revision any </td>
-        </tr>
-        <tr>
-            <td>11:00–12:30 PM</td>
-            <td>Walk home + Lunch + Rest</td>
-            <td>Lunch + Rest</td>
-            <td>fun time</td>
-        </tr>
-        <tr>
-            <td>12:30–2:00 PM</td>
-            <td>Revise DotNet</td>
-            <td>Revise Numerical</td>
-            <td>Work on project/ Assignments </td>
-        </tr>
-        <tr>
-            <td>2:00–3:00 PM</td>
-            <td>Research Methodology / Assignments</td>
-            <td>Weekly Revision</td>
-            <td>Explore ML frameworks</td>
-        </tr>
-        <tr>
-            <td>3:00–4:00 PM</td>
-            <td>AI/ML Learning or Omdena prep</td>
-            <td>Break / Free time</td>
-            <td>Outdoor / Rest</td>
-        </tr>
-        <tr>
-            <td>4:00–5:00 PM</td>
-            <td>Relax / Snack / Walk</td>
-            <td>Hobby / Chill</td>
-            <td>Same</td>
-        </tr>
-        <tr>
-            <td>5:00–6:30 PM</td>
-            <td>Study rotation: Networks / Math Foundation</td>
-            <td>Study:Computer Network</td>
-            <td>Plan next week</td>
-        </tr>
-        <tr>
-            <td>6:30–7:30 PM</td>
-            <td>Dinner + Relax</td>
-            <td>Dinner + Relax</td>
-            <td>Dinner + fun Time</td>
-        </tr>
-        <tr>
-            <td>8:00–9:00 PM</td>
-           <td><b>DotNet Application</b> (Coding Practice)</td>
-            <td>Omdena / Coding Practice</td>
-            <td>Omdena Review or Free</td>
-        </tr>
-        <tr>
-            <td>9:00–9:30 PM</td>
-            <td>Journal Learning / Plan Next Day</td>
-            <td>Plan Week</td>
-            <td>Reflect & Gratitude</td>
-        </tr>
-        <tr>
-            <td>9:30 PM</td>
-            <td>Sleep 😴</td>
-            <td>Sleep 😴</td>
-            <td>Sleep 😴</td>
-        </tr>
-    </table>
+<div class="container">
 
-    <h4>A moment of breakdown is an opportunity for a breakthrough.</h4>
+<h3>📅 Time Table – Raghav Panthi (BCA 6th Semester)</h3>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Raghav Vian Panthi. All Rights Reserved.</p>
-            <a href="https://raghavpanthi.com.np" target="_blank">Personal Website</a>
-        </div>
-    </footer>
+<table>
+<tr>
+<th>Time</th>
+<th>Sun / Mon / Wed</th>
+<th>Tue / Thu / Fri</th>
+<th>Saturday</th>
+</tr>
+
+<tr>
+<td>4:30–5:00</td>
+<td>Wake up + Exercise</td>
+<td>Wake up + Plan</td>
+<td>Wake up</td>
+</tr>
+
+<tr>
+<td>5:00–5:30</td>
+<td>Study: Simulation & Modeling</td>
+<td>Study: MIS</td>
+<td>Project / AI Explore</td>
+</tr>
+
+<tr>
+<td>5:30–6:00</td>
+<td>Breakfast + Get Ready</td>
+<td>Breakfast + Get Ready</td>
+<td>Breakfast</td>
+</tr>
+
+<tr>
+<td>6:00–6:30</td>
+<td>Travel to College</td>
+<td>Travel</td>
+<td>Walk</td>
+</tr>
+
+<tr>
+<td>6:30–11:00</td>
+<td class="subject">College (6th Sem Subjects)</td>
+<td class="subject">College</td>
+<td>Revision / Free</td>
+</tr>
+
+<tr>
+<td>11:00–12:30</td>
+<td>Lunch + Rest</td>
+<td>Lunch + Rest</td>
+<td>Fun</td>
+</tr>
+
+<tr>
+<td>12:30–2:00</td>
+<td>Data Science & Analytics</td>
+<td>Data Warehouse</td>
+<td>Assignments</td>
+</tr>
+
+<tr>
+<td>2:00–3:00</td>
+<td>Simulation Practice</td>
+<td>MIS Revision</td>
+<td>Project Work</td>
+</tr>
+
+<tr>
+<td>3:00–4:00</td>
+<td>AI/ML Learning</td>
+<td>Free / Break</td>
+<td>Rest</td>
+</tr>
+
+<tr>
+<td>4:00–5:00</td>
+<td>Relax / Walk</td>
+<td>Hobby</td>
+<td>Same</td>
+</tr>
+
+<tr>
+<td>5:00–6:30</td>
+<td>Study Rotation</td>
+<td>Organization Management</td>
+<td>Weekly Planning</td>
+</tr>
+
+<tr>
+<td>6:30–7:30</td>
+<td>Dinner</td>
+<td>Dinner</td>
+<td>Dinner</td>
+</tr>
+
+<tr>
+<td>8:00–9:00</td>
+<td class="subject">6th Sem Project</td>
+<td>Coding Practice</td>
+<td>Review</td>
+</tr>
+
+<tr>
+<td>9:00–9:30</td>
+<td>Planning</td>
+<td>Planning</td>
+<td>Reflection</td>
+</tr>
+
+<tr>
+<td>9:30</td>
+<td>Sleep 😴</td>
+<td>Sleep 😴</td>
+<td>Sleep 😴</td>
+</tr>
+
+</table>
+
+<div class="quote">
+A moment of breakdown is an opportunity for a breakthrough.
+</div>
+
+<footer>
+© 2026 Raghav Panthi | All Rights Reserved
+</footer>
+
+</div>
+
 </body>
 </html>
-
-
-
-
