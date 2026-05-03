@@ -1,275 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Time Table - Raghav Panthi</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Raghav Panthi — Schedule 2025–26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;0,700;1,300;1,600&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet"/>
 <style>
-
-/* ===== BODY ===== */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(-45deg, #f7e8a2, #f2c94c, #f2994a, #f7d774);
-    background-size: 400% 400%;
-    animation: gradientBG 12s ease infinite;
-    color: #333;
+:root {
+  --g1:#FFD700; --g2:#FF8C00; --g3:#FF4500;
+  --bg:#07050A; --s1:#100D18; --s2:#16121F; --s3:#1E192C;
+  --border:rgba(255,215,0,.12); --border-b:rgba(255,215,0,.35);
+  --text:#EDE8FF; --muted:#7A6FA0; --glow:rgba(255,180,0,.4);
+  --csim:#64FFDA; --cmis:#FFB347; --cdw:#CF9FFF;
+  --cds:#7EB8FF; --com:#FF8FAB; --cproj:#FFD700; --cai:#98FF98;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;cursor:none}
 
-/* Animated background */
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
+/* CURSOR */
+#cursor{position:fixed;width:12px;height:12px;background:var(--g1);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:difference}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(255,215,0,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s}
 
-/* ===== CONTAINER ===== */
-.container {
-    width: 95%;
-    max-width: 1400px;
-    margin: auto;
-}
+/* BG CANVAS */
+#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* ===== TITLE ===== */
-h3 {
-    text-align: center;
-    font-size: 32px;
-    margin: 30px 0 10px;
-    font-weight: 600;
-    color: #3a2e00;
-}
+/* NOISE */
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.03;z-index:1;pointer-events:none}
 
-/* ===== TABLE ===== */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: fadeIn 1s ease;
-}
+/* WRAPPER */
+.wrapper{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:0 40px 140px}
 
-/* Fade animation */
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
-}
+/* ── HEADER ── */
+header{text-align:center;padding:110px 20px 70px;position:relative}
+header::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-65%);width:700px;height:360px;background:radial-gradient(ellipse,rgba(255,180,0,.15) 0%,transparent 70%);pointer-events:none}
 
-th, td {
-    padding: 14px;
-    text-align: center;
-}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--g1);margin-bottom:36px;opacity:0;animation:riseUp .7s .1s ease forwards}
+.eyebrow::before,.eyebrow::after{content:'';display:block;width:50px;height:1px;background:linear-gradient(90deg,transparent,var(--g1))}
+.eyebrow::after{background:linear-gradient(270deg,transparent,var(--g1))}
 
-/* Header */
-th {
-    background: linear-gradient(135deg, #f2994a, #f2c94c);
-    color: #3d2f00;
-    font-weight: 600;
-}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,9vw,120px);font-weight:700;line-height:.92;letter-spacing:-3px;background:linear-gradient(135deg,#FFFDE7 0%,#FFD700 28%,#FF8C00 62%,#FF4500 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0;animation:riseUp .9s .25s ease forwards}
 
-/* Rows */
-tr:nth-child(even) {
-    background: rgba(255,255,255,0.6);
-}
+.tagline{margin-top:24px;font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:300;color:var(--muted);letter-spacing:2px;opacity:0;animation:riseUp 1s .4s ease forwards}
+.tagline em{color:var(--g1);font-style:normal;font-weight:600}
 
-/* Hover effect */
-tr:hover {
-    transform: scale(1.01);
-    background: #fff2b8;
-    transition: 0.2s;
-}
+/* CLOCK */
+.clock-wrap{margin-top:36px;opacity:0;animation:riseUp .9s .55s ease forwards}
+#live-clock{font-family:'JetBrains Mono',monospace;font-size:clamp(32px,5vw,60px);font-weight:600;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:6px}
+#live-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:3px;margin-top:8px;text-transform:uppercase}
 
-/* Time column */
-td:first-child {
-    font-weight: bold;
-    color: #7a5200;
-}
+/* SECTION DIVIDER */
+.sdiv{display:flex;align-items:center;gap:20px;margin:70px auto;max-width:520px;opacity:0;animation:riseUp .8s .65s ease forwards}
+.sdiv .ln{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border-b),transparent)}
+.sdiv .dm{width:10px;height:10px;background:var(--g1);transform:rotate(45deg);box-shadow:0 0 20px var(--g1),0 0 40px rgba(255,215,0,.4);animation:pdm 2s ease-in-out infinite}
+@keyframes pdm{0%,100%{box-shadow:0 0 12px var(--g1),0 0 24px rgba(255,215,0,.3)}50%{box-shadow:0 0 28px var(--g1),0 0 55px rgba(255,215,0,.65)}}
 
-/* Highlight subjects */
-.subject {
-    font-weight: 600;
-    color: #d35400;
-}
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-bottom:80px}
+.stat{background:var(--s2);border:1px solid var(--border);border-radius:18px;padding:28px 22px;text-align:center;position:relative;overflow:hidden;opacity:0;transform:translateY(20px);transition:transform .3s,box-shadow .3s,border-color .3s,opacity .5s}
+.stat.visible{opacity:1;transform:translateY(0)}
+.stat::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,215,0,.06),transparent);opacity:0;transition:opacity .3s}
+.stat:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 24px 56px rgba(255,180,0,.22);border-color:var(--border-b)}
+.stat:hover::before{opacity:1}
+.stat-icon{font-size:26px;margin-bottom:10px}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;line-height:1;background:linear-gradient(135deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:8px}
 
-/* ===== QUOTE ===== */
-.quote {
-    text-align: center;
-    margin: 30px;
-    font-size: 20px;
-    font-weight: 500;
-    animation: typing 4s steps(40), blink 0.7s infinite alternate;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid #333;
-}
+/* LEGEND */
+.leg-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);text-align:center;margin-bottom:24px}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:80px}
+.pill{display:inline-flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:12px;font-weight:600;padding:9px 20px;border-radius:100px;border:1px solid;letter-spacing:.5px;transition:transform .25s,box-shadow .25s;cursor:default}
+.pill:hover{transform:scale(1.12) translateY(-3px)}
+.pill .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.p-sim{color:var(--csim);border-color:rgba(100,255,218,.3);background:rgba(100,255,218,.07)}.p-sim .dot{background:var(--csim)}
+.p-mis{color:var(--cmis);border-color:rgba(255,179,71,.3);background:rgba(255,179,71,.07)}.p-mis .dot{background:var(--cmis)}
+.p-dw{color:var(--cdw);border-color:rgba(207,159,255,.3);background:rgba(207,159,255,.07)}.p-dw .dot{background:var(--cdw)}
+.p-ds{color:var(--cds);border-color:rgba(126,184,255,.3);background:rgba(126,184,255,.07)}.p-ds .dot{background:var(--cds)}
+.p-om{color:var(--com);border-color:rgba(255,143,171,.3);background:rgba(255,143,171,.07)}.p-om .dot{background:var(--com)}
+.p-proj{color:var(--cproj);border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.07)}.p-proj .dot{background:var(--cproj)}
+.p-ai{color:var(--cai);border-color:rgba(152,255,152,.3);background:rgba(152,255,152,.07)}.p-ai .dot{background:var(--cai)}
 
-/* typing animation */
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
+/* PROGRESS BARS */
+.prog-wrap{margin-bottom:80px;background:var(--s2);border:1px solid var(--border);border-radius:22px;padding:38px;opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s}
+.prog-wrap.visible{opacity:1;transform:translateY(0)}
+.prog-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-bottom:30px;text-align:center}
+.bar-row{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+.bar-label{font-size:13px;font-weight:600;min-width:210px;font-family:'Syne',sans-serif}
+.bar-track{flex:1;height:7px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.bar-fill{height:100%;border-radius:100px;width:0;transition:width 1.6s cubic-bezier(.16,1,.3,1)}
+.bar-pct{font-family:'JetBrains Mono',monospace;font-size:11px;min-width:38px;text-align:right;color:var(--muted)}
 
-@keyframes blink {
-    from {border-color: transparent;}
-    to {border-color: black;}
-}
+/* TABLE */
+.tbl-outer{opacity:0;transform:translateY(36px);transition:opacity .8s,transform .8s}
+.tbl-outer.visible{opacity:1;transform:translateY(0)}
+.tbl-glow{border-radius:26px;overflow:hidden;border:1px solid var(--border);box-shadow:0 0 0 1px rgba(255,215,0,.04),0 0 80px rgba(255,180,0,.07),0 50px 100px rgba(0,0,0,.75);position:relative}
+.tbl-glow::before,.tbl-glow::after{content:'';position:absolute;width:90px;height:90px;border-color:var(--g1);border-style:solid;z-index:5;pointer-events:none;opacity:.35}
+.tbl-glow::before{top:0;left:0;border-width:2px 0 0 2px;border-radius:26px 0 0 0}
+.tbl-glow::after{bottom:0;right:0;border-width:0 2px 2px 0;border-radius:0 0 26px 0}
+.tbl-scroll{overflow-x:auto}
+table{width:100%;min-width:960px;border-collapse:collapse;background:var(--s1);font-family:'Syne',sans-serif}
 
-/* ===== FOOTER ===== */
-footer {
-    text-align: center;
-    padding: 20px;
-    margin-top: 30px;
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(8px);
-}
+/* thead */
+thead{background:linear-gradient(135deg,#1C1628 0%,#100D18 100%);position:sticky;top:0;z-index:10}
+thead::after{content:'';display:block;height:1px;background:linear-gradient(90deg,transparent,var(--g1),transparent)}
+th{padding:24px 20px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;border-right:1px solid var(--border);white-space:nowrap}
+th:last-child{border-right:none}
+th.th-time{color:var(--g2);width:145px}
+th.th-mon{color:var(--csim)}
+th.th-tue{color:var(--cds)}
+th.th-hol{color:var(--com)}
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-    th, td {
-        font-size: 12px;
-        padding: 8px;
-    }
-}
+/* section banners */
+tr.sec{border:none}
+tr.sec td{padding:11px 20px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;border:none;border-bottom:1px solid var(--border)}
+tr.sec-mor td{background:rgba(100,255,218,.06);color:var(--csim);border-left:3px solid var(--csim)}
+tr.sec-col td{background:rgba(126,184,255,.06);color:var(--cds);border-left:3px solid var(--cds)}
+tr.sec-aft td{background:rgba(255,179,71,.06);color:var(--cmis);border-left:3px solid var(--cmis)}
+tr.sec-eve td{background:rgba(207,159,255,.06);color:var(--cdw);border-left:3px solid var(--cdw)}
+tr.sec-nit td{background:rgba(255,143,171,.06);color:var(--com);border-left:3px solid var(--com)}
 
+/* data rows */
+tbody tr:not(.sec){border-bottom:1px solid var(--border);transition:background .2s}
+tbody tr:not(.sec):hover{background:rgba(255,215,0,.04)}
+td{padding:17px 20px;font-size:13.5px;line-height:1.65;border-right:1px solid var(--border);vertical-align:top;transition:background .2s}
+td:last-child{border-right:none}
+td.td-t{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;color:var(--g2);background:rgba(255,140,0,.05);white-space:nowrap;border-left:3px solid rgba(255,140,0,.28)}
+td.td-h{color:#c882a8;background:rgba(255,143,171,.03);font-style:italic;font-size:13px}
+
+/* tags */
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;font-family:'JetBrains Mono',monospace;padding:3px 11px;border-radius:100px;margin:2px 2px 2px 0;letter-spacing:.4px;text-transform:uppercase;border:1px solid;transition:transform .2s,box-shadow .2s}
+.tag:hover{transform:translateY(-2px)}
+.t-sim{color:var(--csim);border-color:rgba(100,255,218,.3);background:rgba(100,255,218,.1)}
+.t-mis{color:var(--cmis);border-color:rgba(255,179,71,.3);background:rgba(255,179,71,.1)}
+.t-dw{color:var(--cdw);border-color:rgba(207,159,255,.3);background:rgba(207,159,255,.1)}
+.t-ds{color:var(--cds);border-color:rgba(126,184,255,.3);background:rgba(126,184,255,.1)}
+.t-om{color:var(--com);border-color:rgba(255,143,171,.3);background:rgba(255,143,171,.1)}
+.t-proj{color:var(--cproj);border-color:rgba(255,215,0,.3);background:rgba(255,215,0,.1)}
+.t-ai{color:var(--cai);border-color:rgba(152,255,152,.3);background:rgba(152,255,152,.1)}
+.cn{display:block;font-size:11.5px;color:var(--muted);margin-top:5px;font-style:italic}
+
+/* QUOTE */
+.quote-sec{margin-top:100px;text-align:center;opacity:0;transform:translateY(28px);transition:opacity .8s .2s,transform .8s .2s}
+.quote-sec.visible{opacity:1;transform:translateY(0)}
+.qm{font-family:'Cormorant Garamond',serif;font-size:130px;line-height:.4;background:linear-gradient(135deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:.22;display:block;margin-bottom:-10px}
+blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.8vw,40px);font-style:italic;font-weight:300;line-height:1.4;background:linear-gradient(135deg,#FFFDE7,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;max-width:720px;margin:0 auto}
+cite{display:block;margin-top:22px;font-family:'JetBrains Mono',monospace;font-size:12px;font-style:normal;color:var(--muted);letter-spacing:2px}
+
+/* FOOTER */
+footer{margin-top:90px;padding:36px 20px;border-top:1px solid var(--border);text-align:center;position:relative;z-index:2}
+footer::before{content:'';display:block;width:220px;height:1px;background:linear-gradient(90deg,transparent,var(--g1),transparent);margin:0 auto 28px}
+.f-name{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.f-link a{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--muted);text-decoration:none;transition:color .2s}
+.f-link a:hover{color:var(--g1)}
+.f-copy{font-size:11px;color:rgba(122,111,160,.45);margin-top:10px;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
+
+/* KEYFRAMES */
+@keyframes riseUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--g2);border-radius:3px}
+
+/* RESPONSIVE */
+@media(max-width:900px){.wrapper{padding:0 18px 80px}th,td{font-size:12px;padding:12px 10px}.stat-num{font-size:30px}.bar-label{min-width:140px;font-size:11px}}
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
 
-<h3>📅 Time Table – Raghav Panthi (BCA 6th Semester)</h3>
+<div class="wrapper">
 
-<table>
-<tr>
-<th>Time</th>
-<th>Sun / Mon / Wed</th>
-<th>Tue / Thu / Fri</th>
-<th>Saturday</th>
-</tr>
+  <header>
+    <div class="eyebrow">Academic Schedule &nbsp;·&nbsp; 2026</div>
+    <h1>Raghav Panthi</h1>
+    <p class="tagline">BCA <em>6th Semester</em> &nbsp;·&nbsp; Daily Planner &amp; Study Blueprint</p>
+    <div class="clock-wrap">
+      <div id="live-clock">--:--:--</div>
+      <div id="live-date">Loading...</div>
+    </div>
+  </header>
 
-<tr>
-<td>4:30–5:00</td>
-<td>Wake up + Exercise</td>
-<td>Wake up + Plan</td>
-<td>Wake up</td>
-</tr>
+  <div class="sdiv"><div class="ln"></div><div class="dm"></div><div class="ln"></div></div>
 
-<tr>
-<td>5:00–5:30</td>
-<td>Study: Simulation & Modeling</td>
-<td>Study: MIS</td>
-<td>Project / AI Explore</td>
-</tr>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat rs"><div class="stat-icon">🎓</div><div class="stat-num">6th</div><div class="stat-lbl">Semester</div></div>
+    <div class="stat rs"><div class="stat-icon">📚</div><div class="stat-num">6</div><div class="stat-lbl">Subjects</div></div>
+    <div class="stat rs"><div class="stat-icon">⏰</div><div class="stat-num">4:30</div><div class="stat-lbl">Wake Up</div></div>
+    <div class="stat rs"><div class="stat-icon">🏫</div><div class="stat-num">6:30</div><div class="stat-lbl">College Start</div></div>
+    <div class="stat rs"><div class="stat-icon">🌙</div><div class="stat-num">9:30</div><div class="stat-lbl">Lights Out</div></div>
+    <div class="stat rs"><div class="stat-icon">💪</div><div class="stat-num">17h</div><div class="stat-lbl">Active Day</div></div>
+  </div>
 
-<tr>
-<td>5:30–6:00</td>
-<td>Breakfast + Get Ready</td>
-<td>Breakfast + Get Ready</td>
-<td>Breakfast</td>
-</tr>
+  <!-- LEGEND -->
+  <p class="leg-title">6th Semester Subjects</p>
+  <div class="legend">
+    <span class="pill p-sim"><span class="dot"></span>Simulation &amp; Modeling</span>
+    <span class="pill p-mis"><span class="dot"></span>MIS</span>
+    <span class="pill p-dw"><span class="dot"></span>Data Warehouse</span>
+    <span class="pill p-ds"><span class="dot"></span>Data Science &amp; Analytics</span>
+    <span class="pill p-om"><span class="dot"></span>Organization Management</span>
+    <span class="pill p-proj"><span class="dot"></span>6th Sem Project</span>
+    <span class="pill p-ai"><span class="dot"></span>AI / ML / Omdena</span>
+  </div>
 
-<tr>
-<td>6:00–6:30</td>
-<td>Travel to College</td>
-<td>Travel</td>
-<td>Walk</td>
-</tr>
+  <!-- PROGRESS BARS -->
+  <div class="prog-wrap rb">
+    <p class="prog-title">Weekly Study Coverage Estimate</p>
+    <div class="bar-row"><span class="bar-label" style="color:var(--csim)">⬡ Simulation &amp; Modeling</span><div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,var(--csim),#00bfa5)" data-w="82"></div></div><span class="bar-pct">82%</span></div>
+    <div class="bar-row"><span class="bar-label" style="color:var(--cmis)">⬡ MIS</span><div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,var(--cmis),#e65100)" data-w="70"></div></div><span class="bar-pct">70%</span></div>
+    <div class="bar-row"><span class="bar-label" style="color:var(--cdw)">⬡ Data Warehouse</span><div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,var(--cdw),#7c4dff)" data-w="78"></div></div><span class="bar-pct">78%</span></div>
+    <div class="bar-row"><span class="bar-label" style="color:var(--cds)">⬡ Data Science &amp; Analytics</span><div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,var(--cds),#0d47a1)" data-w="88"></div></div><span class="bar-pct">88%</span></div>
+    <div class="bar-row"><span class="bar-label" style="color:var(--com)">⬡ Organization Management</span><div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,var(--com),#c2185b)" data-w="65"></div></div><span class="bar-pct">65%</span></div>
+    <div class="bar-row"><span class="bar-label" style="color:var(--cproj)">⬡ 6th Sem Project</span><div class="bar-track"><div class="bar-fill" style="background:linear-gradient(90deg,var(--cproj),var(--g2))" data-w="90"></div></div><span class="bar-pct">90%</span></div>
+  </div>
 
-<tr>
-<td>6:30–11:00</td>
-<td class="subject">College (6th Sem Subjects)</td>
-<td class="subject">College</td>
-<td>Revision / Free</td>
-</tr>
+  <!-- TABLE -->
+  <div class="tbl-outer rb">
+    <div class="tbl-glow">
+      <div class="tbl-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="th-time">⏱ Time Slot</th>
+              <th class="th-mon">📚 Mon &amp; Wed</th>
+              <th class="th-tue">🌙 Tue · Thu · Fri</th>
+              <th class="th-hol">🏖️ Sat &amp; Sun — Holiday</th>
+            </tr>
+          </thead>
+          <tbody>
 
-<tr>
-<td>11:00–12:30</td>
-<td>Lunch + Rest</td>
-<td>Lunch + Rest</td>
-<td>Fun</td>
-</tr>
+            <tr class="sec sec-mor"><td colspan="4">🌅 &nbsp; M O R N I N G &nbsp; R O U T I N E</td></tr>
+            <tr>
+              <td class="td-t">4:30 – 5:00 AM</td>
+              <td>Wake up · Freshen up · Light exercise 🌿</td>
+              <td>Wake up · Plan the day 📋</td>
+              <td class="td-h">Sleep in peacefully 😴 No alarm needed</td>
+            </tr>
+            <tr>
+              <td class="td-t">5:00 – 5:30 AM</td>
+              <td><span class="tag t-sim">Sim &amp; Mod</span><span class="cn">Quick theory review &amp; concepts</span></td>
+              <td><span class="tag t-ds">Data Science</span><span class="cn">Morning read · Problem sets</span></td>
+              <td class="td-h">Explore AI tools · Mini project tinkering 🔧</td>
+            </tr>
+            <tr>
+              <td class="td-t">5:30 – 6:00 AM</td>
+              <td>Breakfast &amp; Get Ready 🍳</td>
+              <td>Breakfast &amp; Get Ready 🍳</td>
+              <td class="td-h">Breakfast at own pace · Slow morning ☕</td>
+            </tr>
+            <tr>
+              <td class="td-t">6:00 – 6:30 AM</td>
+              <td>Walk to College 🚶 <span class="cn">fresh air + mental prep</span></td>
+              <td>Walk to College 🚶</td>
+              <td class="td-h">Outdoor walk · Fresh air · Mindful stroll 🌿</td>
+            </tr>
 
-<tr>
-<td>12:30–2:00</td>
-<td>Data Science & Analytics</td>
-<td>Data Warehouse</td>
-<td>Assignments</td>
-</tr>
+            <tr class="sec sec-col"><td colspan="4">🏫 &nbsp; C O L L E G E &nbsp; H O U R S &nbsp; ( Mon – Fri )</td></tr>
+            <tr>
+              <td class="td-t">6:30 – 11:00 AM</td>
+              <td>College Classes 🎒<br><span class="tag t-sim">Sim &amp; Mod</span><span class="tag t-mis">MIS</span><span class="tag t-dw">Data Warehouse</span></td>
+              <td>College &amp; Revision 🎒<br><span class="tag t-ds">Data Science</span><span class="tag t-om">Org Mgmt</span><span class="tag t-proj">Project</span></td>
+              <td class="td-h">🏖️ Full Holiday — Relax &amp; Recharge completely</td>
+            </tr>
 
-<tr>
-<td>2:00–3:00</td>
-<td>Simulation Practice</td>
-<td>MIS Revision</td>
-<td>Project Work</td>
-</tr>
+            <tr class="sec sec-aft"><td colspan="4">☀️ &nbsp; A F T E R N O O N &nbsp; B L O C K</td></tr>
+            <tr>
+              <td class="td-t">11:00 – 12:30 PM</td>
+              <td>Walk home · Lunch · Power nap 🍜</td>
+              <td>Lunch · Rest · Recharge 🍜</td>
+              <td class="td-h">Late brunch · Leisure · Family time 🍜</td>
+            </tr>
+            <tr>
+              <td class="td-t">12:30 – 2:00 PM</td>
+              <td><span class="tag t-dw">Data Warehouse</span><span class="cn">SQL practice · ER diagrams · Lab work</span></td>
+              <td><span class="tag t-sim">Simulation &amp; Modeling</span><span class="cn">Problems &amp; algorithm revision</span></td>
+              <td class="td-h"><span class="tag t-proj">6th Sem Project</span><span class="cn">Coding · Planning · Documentation</span></td>
+            </tr>
+            <tr>
+              <td class="td-t">2:00 – 3:00 PM</td>
+              <td><span class="tag t-om">Org Management</span><span class="cn">Assignments · Case studies · Notes</span></td>
+              <td><span class="tag t-mis">MIS</span><span class="cn">Weekly revision &amp; past questions</span></td>
+              <td class="td-h"><span class="tag t-ds">Data Science</span><span class="cn">Explore ML frameworks · Kaggle</span></td>
+            </tr>
+            <tr>
+              <td class="td-t">3:00 – 4:00 PM</td>
+              <td><span class="tag t-ai">AI / ML</span><span class="cn">Omdena prep · Research</span></td>
+              <td>Break · Free time ☕</td>
+              <td class="td-h">Outdoor activity · Recharge 🌿</td>
+            </tr>
+            <tr>
+              <td class="td-t">4:00 – 5:00 PM</td>
+              <td>Relax · Snack · Evening walk 🚶</td>
+              <td>Hobby · Chill · Music 🎵</td>
+              <td class="td-h">Hobby · Friends · Chill out 🎵</td>
+            </tr>
 
-<tr>
-<td>3:00–4:00</td>
-<td>AI/ML Learning</td>
-<td>Free / Break</td>
-<td>Rest</td>
-</tr>
+            <tr class="sec sec-eve"><td colspan="4">🌆 &nbsp; E V E N I N G &nbsp; S T U D Y &nbsp; B L O C K</td></tr>
+            <tr>
+              <td class="td-t">5:00 – 6:30 PM</td>
+              <td>Rotation Study<br><span class="tag t-ds">Data Science</span><span class="tag t-sim">Sim &amp; Mod</span></td>
+              <td><span class="tag t-dw">Data Warehouse</span><span class="cn">Deep study session · Concept mapping</span></td>
+              <td class="td-h">Plan &amp; prep for next week 📋 Goal setting</td>
+            </tr>
+            <tr>
+              <td class="td-t">6:30 – 7:30 PM</td>
+              <td>Dinner + Relax 🍽️</td>
+              <td>Dinner + Relax 🍽️</td>
+              <td class="td-h">Dinner + Fun time + Family 🎉</td>
+            </tr>
+            <tr>
+              <td class="td-t">7:30 – 8:00 PM</td>
+              <td>Short break · Fresh air 🌙</td>
+              <td>Short break 🌙</td>
+              <td class="td-h">Wind down · Entertainment 🎬</td>
+            </tr>
 
-<tr>
-<td>4:00–5:00</td>
-<td>Relax / Walk</td>
-<td>Hobby</td>
-<td>Same</td>
-</tr>
+            <tr class="sec sec-nit"><td colspan="4">🌙 &nbsp; N I G H T &nbsp; F O C U S</td></tr>
+            <tr>
+              <td class="td-t">8:00 – 9:00 PM</td>
+              <td><span class="tag t-proj">6th Sem Project</span><span class="cn">Coding · Development · Git commits</span></td>
+              <td><span class="tag t-ai">Omdena</span><span class="cn">Coding practice · AI challenges</span></td>
+              <td class="td-h">Omdena review · Or completely free 🎮</td>
+            </tr>
+            <tr>
+              <td class="td-t">9:00 – 9:30 PM</td>
+              <td>Journal · Learnings · Plan next day 📓</td>
+              <td>Plan the week ahead · Reflection 🗒️</td>
+              <td class="td-h">Reflect · Gratitude · Week review 🙏</td>
+            </tr>
+            <tr>
+              <td class="td-t">9:30 PM</td>
+              <td>😴 &nbsp;Sleep — Rest &amp; Recover</td>
+              <td>😴 &nbsp;Sleep — Rest &amp; Recover</td>
+              <td class="td-h">😴 &nbsp;Sleep — Recharge for the week</td>
+            </tr>
 
-<tr>
-<td>5:00–6:30</td>
-<td>Study Rotation</td>
-<td>Organization Management</td>
-<td>Weekly Planning</td>
-</tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-<tr>
-<td>6:30–7:30</td>
-<td>Dinner</td>
-<td>Dinner</td>
-<td>Dinner</td>
-</tr>
+  <!-- QUOTE -->
+  <div class="quote-sec rb">
+    <span class="qm">"</span>
+    <blockquote>
+      A moment of breakdown is an opportunity for a breakthrough.
+      <cite>— Raghav Vian Panthi</cite>
+    </blockquote>
+  </div>
 
-<tr>
-<td>8:00–9:00</td>
-<td class="subject">6th Sem Project</td>
-<td>Coding Practice</td>
-<td>Review</td>
-</tr>
-
-<tr>
-<td>9:00–9:30</td>
-<td>Planning</td>
-<td>Planning</td>
-<td>Reflection</td>
-</tr>
-
-<tr>
-<td>9:30</td>
-<td>Sleep 😴</td>
-<td>Sleep 😴</td>
-<td>Sleep 😴</td>
-</tr>
-
-</table>
-
-<div class="quote">
-A moment of breakdown is an opportunity for a breakthrough.
 </div>
 
 <footer>
-© 2026 Raghav Panthi | All Rights Reserved
+  <div class="f-name">Raghav Vian Panthi</div>
+  <div class="f-link"><a href="https://raghavpanthi.com.np" target="_blank">raghavpanthi.com.np ↗</a></div>
+  <div class="f-copy">&copy; 2025–26 · BCA 6th Semester · All Rights Reserved</div>
 </footer>
 
-</div>
+<script>
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function animR(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animR)})();
+document.querySelectorAll('a,th,td,.pill,.stat,.tag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';ring.style.width='58px';ring.style.height='58px'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';ring.style.width='36px';ring.style.height='36px'});
+});
 
+/* ── LIVE CLOCK ── */
+function tick(){
+  const n=new Date(),hh=String(n.getHours()).padStart(2,'0'),mm=String(n.getMinutes()).padStart(2,'0'),ss=String(n.getSeconds()).padStart(2,'0');
+  document.getElementById('live-clock').textContent=`${hh}:${mm}:${ss}`;
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  document.getElementById('live-date').textContent=`${days[n.getDay()]} · ${n.getDate()} ${months[n.getMonth()]} ${n.getFullYear()}`;
+}
+tick();setInterval(tick,1000);
+
+/* ── ANIMATED BACKGROUND ── */
+const canvas=document.getElementById('bg-canvas'),ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function rsz(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
+rsz();window.addEventListener('resize',rsz);
+
+const COLORS=['rgba(255,215,0,','rgba(255,140,0,','rgba(100,255,218,','rgba(126,184,255,','rgba(207,159,255,'];
+function mkP(){return{x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+.3,a:Math.random(),da:(Math.random()-.5)*.007,vx:(Math.random()-.5)*.22,vy:(Math.random()-.5)*.22,c:COLORS[Math.floor(Math.random()*COLORS.length)]}}
+for(let i=0;i<220;i++)particles.push(mkP());
+
+const ORBS=[{px:.12,py:.18,r:380,c:'255,140,0',a:.065},{px:.87,py:.72,r:320,c:'100,255,218',a:.05},{px:.5,py:.5,r:280,c:'207,159,255',a:.04}];
+let T=0;
+
+function frame(){
+  ctx.clearRect(0,0,W,H);T+=.004;
+  ORBS.forEach((o,i)=>{
+    const ox=o.px*W+Math.sin(T+i*1.4)*70,oy=o.py*H+Math.cos(T+i*1.8)*45;
+    const g=ctx.createRadialGradient(ox,oy,0,ox,oy,o.r);
+    g.addColorStop(0,`rgba(${o.c},${o.a})`);g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(ox,oy,o.r,0,Math.PI*2);ctx.fill();
+  });
+  // constellation
+  for(let i=0;i<particles.length;i++)for(let j=i+1;j<particles.length;j++){
+    const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);
+    if(d<130){ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.strokeStyle=`rgba(255,215,0,${.045*(1-d/130)})`;ctx.lineWidth=.5;ctx.stroke()}
+  }
+  particles.forEach(p=>{
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c+Math.max(.05,p.a)+')';ctx.fill();
+    p.a+=p.da;if(p.a>1||p.a<0)p.da*=-1;
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;
+  });
+  requestAnimationFrame(frame);
+}
+frame();
+
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.bar-fill').forEach(b=>setTimeout(()=>{b.style.width=b.dataset.w+'%'},200));
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.08});
+document.querySelectorAll('.rb').forEach(el=>io.observe(el));
+
+document.querySelectorAll('.rs').forEach((el,i)=>{
+  const o=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*90);o.unobserve(e.target)}})},{threshold:.1});
+  o.observe(el);
+});
+
+/* ── TABLE ROW STAGGER ── */
+const tio=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting){
+    document.querySelectorAll('tbody tr').forEach((tr,i)=>{
+      tr.style.opacity='0';tr.style.transform='translateX(-18px)';
+      tr.style.transition=`opacity .45s ease ${i*.028}s,transform .45s ease ${i*.028}s`;
+      setTimeout(()=>{tr.style.opacity='1';tr.style.transform='translateX(0)'},60);
+    });
+    tio.disconnect();
+  }
+},{threshold:.05});
+const tw=document.querySelector('.tbl-outer');if(tw)tio.observe(tw);
+</script>
 </body>
 </html>
