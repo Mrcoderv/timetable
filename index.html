@@ -156,6 +156,79 @@ footer::before{content:'';display:block;width:220px;height:1px;background:linear
 .f-link a:hover{color:var(--g1)}
 .f-copy{font-size:11px;color:rgba(122,111,160,.45);margin-top:10px;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
 
+/* ── NOW CARD ── */
+#now-card{
+  position:fixed;bottom:28px;right:28px;z-index:500;
+  width:320px;
+  background:linear-gradient(135deg,#1C1628ee,#100D18ee);
+  border:1px solid var(--border-b);
+  border-radius:20px;
+  padding:20px 22px;
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 0 1px rgba(255,215,0,.06),0 20px 50px rgba(0,0,0,.7),0 0 40px rgba(255,180,0,.1);
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s,transform .5s;
+}
+#now-card.show{opacity:1;transform:translateY(0)}
+.now-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.now-badge{
+  font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:3px;
+  text-transform:uppercase;padding:4px 12px;border-radius:100px;
+  background:rgba(255,215,0,.15);border:1px solid rgba(255,215,0,.4);color:var(--g1);
+}
+.now-pulse{
+  width:8px;height:8px;border-radius:50%;background:#4cff91;
+  box-shadow:0 0 8px #4cff91;
+  animation:npulse 1.4s ease-in-out infinite;
+}
+@keyframes npulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+.now-time{
+  font-family:'JetBrains Mono',monospace;font-size:11px;
+  color:var(--g2);margin-bottom:6px;
+}
+.now-task{
+  font-family:'Syne',sans-serif;font-size:15px;font-weight:700;
+  color:var(--text);line-height:1.35;margin-bottom:8px;
+}
+.now-day{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--muted);letter-spacing:1px;
+}
+.now-next{
+  margin-top:12px;padding-top:12px;border-top:1px solid var(--border);
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);
+}
+.now-next span{color:var(--text);font-size:11px;font-family:'Syne',sans-serif}
+.now-progress-wrap{margin-top:10px}
+.now-prog-track{height:3px;background:rgba(255,255,255,.07);border-radius:100px;overflow:hidden;margin-top:5px}
+.now-prog-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,var(--g1),var(--g2));transition:width .5s}
+.now-prog-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px}
+#now-toggle{
+  position:fixed;bottom:28px;right:28px;z-index:501;
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,var(--g1),var(--g2));
+  border:none;cursor:none;
+  box-shadow:0 0 24px rgba(255,180,0,.4);
+  font-size:20px;
+  display:none;align-items:center;justify-content:center;
+  transition:transform .2s,box-shadow .2s;
+}
+#now-toggle:hover{transform:scale(1.1);box-shadow:0 0 36px rgba(255,180,0,.6)}
+
+/* highlight active row in table */
+tr.active-row td:not(.td-t){
+  background:rgba(255,215,0,.06) !important;
+}
+tr.active-row td.td-t{
+  background:rgba(255,215,0,.14) !important;
+  border-left:3px solid var(--g1) !important;
+  color:var(--g1) !important;
+}
+tr.active-row td.td-t::after{
+  content:' ◀ NOW';font-size:9px;letter-spacing:1px;
+  color:var(--g1);display:block;margin-top:2px;
+}
+
 /* KEYFRAMES */
 @keyframes riseUp{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}
 
@@ -177,8 +250,8 @@ footer::before{content:'';display:block;width:220px;height:1px;background:linear
 <div class="wrapper">
 
   <header>
-    <div class="eyebrow">Academic Schedule &nbsp;·&nbsp; 2026</div>
-    <h1>Raghav Vian Panthi</h1>
+    <div class="eyebrow">Academic Schedule &nbsp;·&nbsp; 2025–26</div>
+    <h1>Raghav Panthi</h1>
     <p class="tagline">BCA <em>6th Semester</em> &nbsp;·&nbsp; Daily Planner &amp; Study Blueprint</p>
     <div class="clock-wrap">
       <div id="live-clock">--:--:--</div>
@@ -359,7 +432,21 @@ footer::before{content:'';display:block;width:220px;height:1px;background:linear
 
 </div>
 
-<footer>
+<!-- NOW CARD -->
+<div id="now-card">
+  <div class="now-top">
+    <span class="now-badge">⚡ Now</span>
+    <span class="now-pulse"></span>
+  </div>
+  <div class="now-time" id="nc-slot">—</div>
+  <div class="now-task" id="nc-task">Loading...</div>
+  <div class="now-day" id="nc-day">—</div>
+  <div class="now-progress-wrap">
+    <div class="now-prog-label" id="nc-prog-label">Slot progress</div>
+    <div class="now-prog-track"><div class="now-prog-fill" id="nc-prog-fill" style="width:0%"></div></div>
+  </div>
+  <div class="now-next" id="nc-next">Next: <span>—</span></div>
+</div>
   <div class="f-name">Raghav Vian Panthi</div>
   <div class="f-link"><a href="https://raghavpanthi.com.np" target="_blank">raghavpanthi.com.np ↗</a></div>
   <div class="f-copy">&copy; 2025–26 · BCA 6th Semester · All Rights Reserved</div>
@@ -451,6 +538,99 @@ const tio=new IntersectionObserver(entries=>{
   }
 },{threshold:.05});
 const tw=document.querySelector('.tbl-outer');if(tw)tio.observe(tw);
+
+/* ── CURRENT TASK ENGINE ── */
+// Schedule: [startH, startM, endH, endM, monWed task, tueThuFri task, satSun task]
+const SCHEDULE = [
+  [4,30, 5,0,  'Wake up · Freshen up · Light exercise 🌿','Wake up · Plan the day 📋','Sleep in peacefully 😴 No alarm needed'],
+  [5,0,  5,30, 'Sim & Mod — Quick theory review','Data Science — Morning read','Explore AI tools · Mini project tinkering 🔧'],
+  [5,30, 6,0,  'Breakfast & Get Ready 🍳','Breakfast & Get Ready 🍳','Breakfast at own pace · Slow morning ☕'],
+  [6,0,  6,30, 'Walk to College 🚶','Walk to College 🚶','Outdoor walk · Mindful stroll 🌿'],
+  [6,30, 11,0, 'College Classes — Sim & Mod · MIS · Data Warehouse','College & Revision — Data Science · Org Mgmt · Project','🏖️ Holiday — Relax & Recharge completely'],
+  [11,0, 12,30,'Walk home · Lunch · Power nap 🍜','Lunch · Rest · Recharge 🍜','Late brunch · Leisure · Family time 🍜'],
+  [12,30,14,0, 'Data Warehouse — SQL practice · ER diagrams','Simulation & Modeling — Problems & revision','6th Sem Project — Coding · Planning'],
+  [14,0, 15,0, 'Org Management — Assignments · Notes','MIS — Weekly revision','Data Science — Explore ML · Kaggle'],
+  [15,0, 16,0, 'AI / ML — Omdena prep · Research','Break · Free time ☕','Outdoor activity · Recharge 🌿'],
+  [16,0, 17,0, 'Relax · Snack · Evening walk 🚶','Hobby · Chill · Music 🎵','Hobby · Friends · Chill out 🎵'],
+  [17,0, 18,30,'Data Science + Sim & Mod — Rotation Study','Data Warehouse — Deep study session','Plan & prep for next week 📋'],
+  [18,30,19,30,'Dinner + Relax 🍽️','Dinner + Relax 🍽️','Dinner + Fun time + Family 🎉'],
+  [19,30,20,0, 'Short break · Fresh air 🌙','Short break 🌙','Wind down · Entertainment 🎬'],
+  [20,0, 21,0, '6th Sem Project — Coding · Git commits','Omdena — Coding practice · AI challenges','Omdena review · Or free time 🎮'],
+  [21,0, 21,30,'Journal · Learnings · Plan next day 📓','Plan the week ahead · Reflection 🗒️','Reflect · Gratitude · Week review 🙏'],
+  [21,30,24,0, '😴 Sleep — Rest & Recover','😴 Sleep — Rest & Recover','😴 Sleep — Recharge for the week'],
+  [0,0,  4,30, '😴 Sleep — Rest & Recover','😴 Sleep — Rest & Recover','😴 Sleep — Recharge'],
+];
+
+const SLOT_LABELS = [
+  '4:30 – 5:00 AM','5:00 – 5:30 AM','5:30 – 6:00 AM','6:00 – 6:30 AM',
+  '6:30 – 11:00 AM','11:00 – 12:30 PM','12:30 – 2:00 PM','2:00 – 3:00 PM',
+  '3:00 – 4:00 PM','4:00 – 5:00 PM','5:00 – 6:30 PM','6:30 – 7:30 PM',
+  '7:30 – 8:00 PM','8:00 – 9:00 PM','9:00 – 9:30 PM','9:30 PM – 4:30 AM','0:00 – 4:30 AM'
+];
+
+// day group: 0=monWed(col 2), 1=tueThuFri(col 3), 2=satSun(col 4)
+function getDayGroup(d){
+  if(d===1||d===3)return 0; // Mon,Wed
+  if(d===2||d===4||d===5)return 1; // Tue,Thu,Fri
+  return 2; // Sat(6),Sun(0)
+}
+
+function toMins(h,m){return h*60+m}
+
+function updateNow(){
+  const now=new Date();
+  const dayGroup=getDayGroup(now.getDay());
+  const dayNames=['Mon & Wed','Tue · Thu · Fri','Sat & Sun (Holiday)'];
+  const cur=toMins(now.getHours(),now.getMinutes());
+
+  let found=-1;
+  for(let i=0;i<SCHEDULE.length;i++){
+    const s=SCHEDULE[i];
+    const st=toMins(s[0],s[1]),en=toMins(s[2],s[3]);
+    // handle midnight wrap for sleep slot
+    if(st>en){
+      if(cur>=st||cur<en){found=i;break}
+    } else {
+      if(cur>=st&&cur<en){found=i;break}
+    }
+  }
+
+  if(found===-1)return;
+  const slot=SCHEDULE[found];
+  const task=slot[4+dayGroup];
+  const slotStart=toMins(slot[0],slot[1]);
+  const slotEnd=toMins(slot[2],slot[3]);
+  const slotDur=slotEnd>slotStart?slotEnd-slotStart:(24*60-slotStart+slotEnd);
+  const elapsed=cur>=slotStart?cur-slotStart:(24*60-slotStart+cur);
+  const pct=Math.min(100,Math.round(elapsed/slotDur*100));
+
+  // next slot
+  const nextIdx=(found+1)%SCHEDULE.length;
+  const nextTask=SCHEDULE[nextIdx][4+dayGroup];
+
+  document.getElementById('nc-slot').textContent=SLOT_LABELS[found]||'';
+  document.getElementById('nc-task').textContent=task;
+  document.getElementById('nc-day').textContent=`📅 ${['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][now.getDay()]} · ${dayNames[dayGroup]}`;
+  document.getElementById('nc-prog-label').textContent=`Slot progress · ${pct}%`;
+  document.getElementById('nc-prog-fill').style.width=pct+'%';
+  document.getElementById('nc-next').innerHTML=`Next: <span>${nextTask.slice(0,45)}${nextTask.length>45?'…':''}</span>`;
+
+  // show card
+  document.getElementById('now-card').classList.add('show');
+
+  // highlight matching table row
+  document.querySelectorAll('tbody tr').forEach(tr=>tr.classList.remove('active-row'));
+  const tdTCells=document.querySelectorAll('td.td-t');
+  tdTCells.forEach(td=>{
+    const txt=td.textContent.trim();
+    if(SLOT_LABELS[found]&&txt.replace(/◀ NOW/,'').trim()===SLOT_LABELS[found]){
+      td.closest('tr').classList.add('active-row');
+    }
+  });
+}
+
+updateNow();
+setInterval(updateNow,30000); // refresh every 30s
 </script>
 </body>
 </html>
